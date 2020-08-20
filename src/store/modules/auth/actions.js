@@ -14,11 +14,7 @@ export function signInSuccess(token, user) {
 
 export function signUpRequest(
   name,
-  lastName,
   phone,
-  cpf,
-  gender,
-  birthday,
   email,
   password,
 ) {
@@ -26,11 +22,7 @@ export function signUpRequest(
     type: '@auth/SIGN_UP_REQUEST',
     payload: {
       name,
-      lastName,
       phone,
-      cpf,
-      gender,
-      birthday,
       email,
       password,
     },

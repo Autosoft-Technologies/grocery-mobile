@@ -10,24 +10,15 @@ export function* updateProfile({ payload }) {
   try {
     const {
       name,
-      lastName,
       email,
       phone,
-      birthdayFormatted,
-      birthday,
-      gender,
-      cpf,
       ...rest
     } = payload.data;
 
     const profile = {
       name,
-      last_name: lastName,
       email,
       phone,
-      birthday: birthdayFormatted,
-      gender,
-      cpf,
       ...(rest.oldPassword ? rest : {}),
     };
     const response = yield call(api.put, 'users', profile);
@@ -39,7 +30,6 @@ export function* updateProfile({ payload }) {
     yield put(
       updateProfileSuccess({
         ...response.data,
-        cpf: String(response.data.cpf),
         phone: String(response.data.phone),
       }),
     );

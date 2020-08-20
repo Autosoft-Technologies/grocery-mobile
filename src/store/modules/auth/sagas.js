@@ -40,24 +40,16 @@ export function* signUp({ payload }) {
   try {
     const {
       name,
-      lastName,
       phone,
-      cpf,
-      gender,
-      birthday,
       email,
       password,
     } = payload;
 
     yield call(api.post, 'users', {
       name,
-      last_name: lastName,
-      email,
       phone,
+      email,
       password,
-      birthday,
-      gender,
-      cpf,
     });
 
     yield put(signUpSuccess());

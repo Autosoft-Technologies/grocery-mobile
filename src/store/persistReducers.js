@@ -1,8 +1,8 @@
 import storage from '@react-native-community/async-storage';
-import { persistReducer } from 'redux-persist';
+import {persistReducer} from 'redux-persist';
 
 export default reducers => {
-  const persistedReducer = persistReducer(
+  return persistReducer(
     {
       key: 'grocery',
       storage,
@@ -10,6 +10,4 @@ export default reducers => {
     },
     reducers,
   );
-
-  return persistedReducer;
 };

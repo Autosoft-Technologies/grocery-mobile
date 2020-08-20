@@ -8,10 +8,6 @@ async function handleChangeText(fields, id, value) {
     text = masks.phoneMask(text);
   }
 
-  if (id === 'cpf') {
-    text = masks.cpfMask(text);
-  }
-
   try {
     await signUpSchema.validateSync(
       { ...fields, [id]: text },

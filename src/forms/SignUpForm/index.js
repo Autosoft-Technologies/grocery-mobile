@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Text, } from 'react-native';
 import { format } from 'date-fns';
 
 import translate, { dateLanguage } from '../../locales';
@@ -8,12 +9,6 @@ import { unformatNumber } from '../../util/format';
 import {
   SubmitButton,
   Input,
-  GenderContainer,
-  ButtonContainer,
-  GenderLabel,
-  TextButton,
-  TextButtonText,
-  DateInput,
 } from './styles';
 
 import {
@@ -23,44 +18,21 @@ import {
 } from '../validation/validations/signUpValidation';
 
 export default function SignUpForm({ handleFormSubmit, loading }) {
-  const [gender, setGender] = useState({ female: false, male: true });
-  const [birthdayFormatted, setBirthdayFormatted] = useState('');
   const [fieldErrors, setFieldErrors] = useState({});
   const [touched, setTouched] = useState({});
   const [form, setForm] = useState({
     name: '',
-    lastName: '',
     phone: '',
-    birthday: '',
-    cpf: '',
     email: '',
     password: '',
     passwordConfirmation: '',
   });
 
-  const lastNameRef = useRef();
+  const nameRef = useRef();
   const phoneRef = useRef();
-  const birthdayRef = useRef();
-  const cpfRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmationRef = useRef();
-
-  function handleDateChange(date) {
-    if (date) {
-      const dateFormatted = format(date, 'PPP', {
-        locale: dateLanguage,
-      });
-
-      setBirthdayFormatted(format(date, "yyyy-MM-dd'T00:00:00'xxx"));
-      setForm({
-        ...form,
-        birthday: dateFormatted,
-      });
-
-      onChangeText('birthday', dateFormatted);
-    }
-  }
 
   async function onChangeText(id, value) {
     const { errors, text } = await handleChangeText(form, id, value);
@@ -96,9 +68,6 @@ export default function SignUpForm({ handleFormSubmit, loading }) {
       handleFormSubmit({
         ...form,
         phone: unformatNumber(form.phone),
-        cpf: unformatNumber(form.cpf),
-        birthday: birthdayFormatted,
-        gender: gender.male ? 'm' : 'f',
       });
     } else {
       let alltouched;
@@ -114,89 +83,35 @@ export default function SignUpForm({ handleFormSubmit, loading }) {
     <>
       <Input
         icon="user"
-        placeholder={translate('first_name_placeholder')}
+        placeholder="Name"
         autoCorrect={false}
         autoCapitalize="words"
         onChangeText={text => onChangeText('name', text)}
         onBlur={() => onBlur('name')}
         value={form.name}
         returnKeyType="next"
-        onSubmitEditing={() => lastNameRef.current.focus()}
+        onSubmitEditing={() => phoneRef.current.focus()}
         error={fieldErrors.name && touched.name && fieldErrors.name}
       />
       <Input
-        icon="user"
-        placeholder={translate('last_name_placeholder')}
-        autoCorrect={false}
-        autoCapitalize="words"
-        onChangeText={text => onChangeText('lastName', text)}
-        onBlur={() => onBlur('lastName')}
-        value={form.lastName}
-        returnKeyType="next"
-        onSubmitEditing={() => phoneRef.current.focus()}
-        error={fieldErrors.lastName && touched.lastName && fieldErrors.lastName}
-      />
-      <Input
         icon="phone"
-        placeholder={translate('phone_placeholder')}
+        placeholder="Phone"
         keyboardType="phone-pad"
+        ref={phoneRef}
         maxLength={15}
         autoCorrect={false}
         onChangeText={text => onChangeText('phone', text)}
         onBlur={() => onBlur('phone')}
         value={form.phone}
         returnKeyType="next"
-        onSubmitEditing={() => birthdayRef.current.focus()}
+        onSubmitEditing={() => emailRef.current.focus()}
         error={fieldErrors.phone && touched.phone && fieldErrors.phone}
       />
-      <GenderContainer>
-        <GenderLabel>{translate('gender_label')}</GenderLabel>
-        <ButtonContainer>
-          <TextButton
-            onPress={() => {
-              setGender({ female: false, male: true });
-            }}>
-            <TextButtonText disabled={gender.female} color="#2196f3">
-              {translate('male_button')}
-            </TextButtonText>
-          </TextButton>
-          <TextButton
-            onPress={() => {
-              setGender({ female: true, male: false });
-            }}>
-            <TextButtonText disabled={gender.male} color="#ff4081">
-              {translate('female_button')}
-            </TextButtonText>
-          </TextButton>
-        </ButtonContainer>
-      </GenderContainer>
-      <DateInput
-        icon="birthday-cake"
-        placeholder={translate('birthday_placeholder')}
-        autoCorrect={false}
-        onDateChange={handleDateChange}
-        onBlur={() => onBlur('birthday')}
-        value={form.birthday}
-        returnKeyType="next"
-        onSubmitEditing={() => cpfRef.current.focus()}
-        error={fieldErrors.birthday && touched.birthday && fieldErrors.birthday}
-      />
-      <Input
-        icon="id-card"
-        placeholder={translate('national_id_placeholder')}
-        maxLength={14}
-        autoCorrect={false}
-        keyboardType="numeric"
-        onChangeText={text => onChangeText('cpf', text)}
-        onBlur={() => onBlur('cpf')}
-        value={form.cpf}
-        returnKeyType="next"
-        onSubmitEditing={() => emailRef.current.focus()}
-        error={fieldErrors.cpf && touched.cpf && fieldErrors.cpf}
-      />
+      
       <Input
         icon="envelope"
-        placeholder={translate('email_placeholder_2')}
+        placeholder="Email"
+        ref={emailRef}
         autoCorrect={false}
         onChangeText={text => onChangeText('email', text)}
         onBlur={() => onBlur('email')}
@@ -208,7 +123,7 @@ export default function SignUpForm({ handleFormSubmit, loading }) {
       <Input
         icon="lock"
         secureTextEntry
-        placeholder={translate('password_placeholder')}
+        placeholder="Password"
         ref={passwordRef}
         onChangeText={text => onChangeText('password', text)}
         onBlur={() => onBlur('password')}
@@ -220,7 +135,7 @@ export default function SignUpForm({ handleFormSubmit, loading }) {
       <Input
         icon="lock"
         secureTextEntry
-        placeholder={translate('password_confirmation_placeholder')}
+        placeholder="Confirm the password"
         ref={passwordConfirmationRef}
         onChangeText={text => onChangeText('passwordConfirmation', text)}
         onBlur={() => onBlur('passwordConfirmation')}
@@ -234,7 +149,7 @@ export default function SignUpForm({ handleFormSubmit, loading }) {
         }
       />
       <SubmitButton onPress={onSubmit} loading={loading}>
-        {translate('sign_up_button')}
+        <Text>Sign up</Text>
       </SubmitButton>
     </>
   );

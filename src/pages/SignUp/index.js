@@ -24,22 +24,14 @@ export default function SignUp({ navigation }) {
 
   function handleFormSubmit({
     name,
-    lastName,
     phone,
-    cpf,
-    gender,
-    birthday,
     email,
     password,
   }) {
     dispatch(
       signUpRequest(
         name,
-        lastName,
         phone,
-        cpf,
-        gender,
-        birthday,
         email,
         password,
       ),
@@ -54,7 +46,7 @@ export default function SignUp({ navigation }) {
           <SignUpForm handleFormSubmit={handleFormSubmit} loading={loading} />
           <SignLink onPress={() => navigation.navigate('SignIn')}>
             <SignLinkText>
-              {translate('i_already_have_an_account_button')}
+              I already have an account
             </SignLinkText>
           </SignLink>
         </FormContainer>

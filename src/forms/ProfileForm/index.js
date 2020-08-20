@@ -30,44 +30,18 @@ export default function ProfileForm({ handleFormSubmit, loading }) {
   const [touched, setTouched] = useState({});
   const [form, setForm] = useState({
     name: profile.name,
-    lastName: profile.last_name,
     phone: formatPhone(profile.phone),
-    gender: profile.gender,
-    birthday: format(parseISO(profile.birthday), 'PPP', {
-      locale: dateLanguage,
-    }),
-    birthdayFormatted: profile.birthday,
-    cpf: formatCPF(profile.cpf),
     email: profile.email,
     oldPassword: '',
     password: '',
     passwordConfirmation: '',
   });
 
-  const lastNameRef = useRef();
   const phoneRef = useRef();
-  const birthdayRef = useRef();
-  const cpfRef = useRef();
   const emailRef = useRef();
   const oldPasswordRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmationRef = useRef();
-
-  async function handleDateChange(date) {
-    if (date) {
-      const dateFormatted = format(date, 'PPP', {
-        locale: dateLanguage,
-      });
-
-      await onChangeText('birthday', dateFormatted);
-
-      setForm({
-        ...form,
-        birthday: dateFormatted,
-        birthdayFormatted: format(date, "yyyy-MM-dd'T00:00:00'xxx"),
-      });
-    }
-  }
 
   async function onChangeText(id, value) {
     const { errors, text } = await handleChangeText(form, id, value);
@@ -96,6 +70,7 @@ export default function ProfileForm({ handleFormSubmit, loading }) {
       const errors = await handleBlur(form);
 
       if (errors) {
+        console.log(errors)
         setFieldErrors(errors);
       } else {
         const { [id]: _, ...rest } = fieldErrors;
@@ -111,7 +86,6 @@ export default function ProfileForm({ handleFormSubmit, loading }) {
       handleFormSubmit({
         ...form,
         phone: unformatNumber(form.phone),
-        cpf: unformatNumber(form.cpf),
       });
     } else {
       let alltouched;
@@ -134,24 +108,13 @@ export default function ProfileForm({ handleFormSubmit, loading }) {
         onBlur={() => onBlur('name')}
         value={form.name}
         returnKeyType="next"
-        onSubmitEditing={() => lastNameRef.current.focus()}
-        error={fieldErrors.name && touched.name && fieldErrors.name}
-      />
-      <Input
-        icon="user"
-        placeholder={translate('last_name_placeholder')}
-        autoCorrect={false}
-        autoCapitalize="words"
-        onChangeText={text => onChangeText('lastName', text)}
-        onBlur={() => onBlur('lastName')}
-        value={form.lastName}
-        returnKeyType="next"
         onSubmitEditing={() => phoneRef.current.focus()}
-        error={fieldErrors.lastName && touched.lastName && fieldErrors.lastName}
+        error={fieldErrors.name && touched.name && fieldErrors.name}
       />
       <Input
         icon="phone"
         placeholder={translate('phone_placeholder')}
+        ref={phoneRef}
         keyboardType="phone-pad"
         maxLength={15}
         autoCorrect={false}
@@ -159,63 +122,19 @@ export default function ProfileForm({ handleFormSubmit, loading }) {
         onBlur={() => onBlur('phone')}
         value={form.phone}
         returnKeyType="next"
-        onSubmitEditing={() => birthdayRef.current.focus()}
-        error={fieldErrors.phone && touched.phone && fieldErrors.phone}
-      />
-      <GenderContainer>
-        <GenderLabel>{translate('gender_label')}</GenderLabel>
-        <ButtonContainer>
-          <TextButton
-            onPress={() => {
-              setForm({ ...form, gender: 'm' });
-            }}>
-            <TextButtonText disabled={form.gender === 'f'} color="#2196f3">
-              {translate('male_button')}
-            </TextButtonText>
-          </TextButton>
-          <TextButton
-            onPress={() => {
-              setForm({ ...form, gender: 'f' });
-            }}>
-            <TextButtonText disabled={form.gender === 'm'} color="#ff4081">
-              {translate('female_button')}
-            </TextButtonText>
-          </TextButton>
-        </ButtonContainer>
-      </GenderContainer>
-      <DateInput
-        icon="birthday-cake"
-        placeholder={translate('birthday_placeholder')}
-        autoCorrect={false}
-        onDateChange={handleDateChange}
-        onBlur={() => onBlur('birthday')}
-        value={form.birthday}
-        returnKeyType="next"
-        onSubmitEditing={() => cpfRef.current.focus()}
-        error={fieldErrors.birthday && touched.birthday && fieldErrors.birthday}
-      />
-      <Input
-        icon="id-card"
-        placeholder={translate('national_id_placeholder')}
-        maxLength={14}
-        autoCorrect={false}
-        keyboardType="numeric"
-        onChangeText={text => onChangeText('cpf', text)}
-        onBlur={() => onBlur('cpf')}
-        value={form.cpf}
-        returnKeyType="next"
         onSubmitEditing={() => emailRef.current.focus()}
-        error={fieldErrors.cpf && touched.cpf && fieldErrors.cpf}
+        error={fieldErrors.phone && touched.phone && fieldErrors.phone}
       />
       <Input
         icon="envelope"
         placeholder={translate('email_placeholder_2')}
+        ref={emailRef}
         autoCorrect={false}
         onChangeText={text => onChangeText('email', text)}
         onBlur={() => onBlur('email')}
         value={form.email}
         returnKeyType="next"
-        onSubmitEditing={() => passwordRef.current.focus()}
+        onSubmitEditing={() => oldPasswordRef.current.focus()}
         error={fieldErrors.email && touched.email && fieldErrors.email}
       />
       <Input
