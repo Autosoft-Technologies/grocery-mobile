@@ -3,13 +3,13 @@ import translate from '../../../locales';
 
 const profileSchema = Yup.object().shape({
   name: Yup.string(),
-  email: Yup.string().email(translate('email_error_1')),
+  email: Yup.string().email('Enter a valid email'),
   oldPassword: Yup.string(),
   password: Yup.string().when('oldPassword', (oldPassword, field) =>
     oldPassword
       ? field
-          .min(6, translate('new_password_error_1'))
-          .required(translate('new_password_error_2'))
+          .min(6, 'Password must be at least 6 characters')
+          .required('New password is required')
       : field,
   ),
   passwordConfirmation: Yup.string().when('password', (password, field) =>
@@ -17,9 +17,9 @@ const profileSchema = Yup.object().shape({
       ? field
           .oneOf(
             [Yup.ref('password')],
-            translate('password_confirmation_error_1'),
+            'Passwords do not match',
           )
-          .required(translate('password_confirmation_error_2'))
+          .required('Password confirmation is required')
       : field,
   ),
 });

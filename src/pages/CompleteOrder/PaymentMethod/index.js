@@ -173,7 +173,7 @@ export default function PaymentMethod({ navigation }) {
             </MethodSelect>
             <IconContainer>
               <CashIcon />
-              <MethodTitle>{translate('cash_button')}</MethodTitle>
+              <MethodTitle>Cash</MethodTitle>
             </IconContainer>
           </CashPayment>
           <CreditCardPayment onPress={() => setMethodSelected('credit_card')}>
@@ -190,7 +190,7 @@ export default function PaymentMethod({ navigation }) {
             </MethodSelect>
             <IconContainer>
               <CreditCardIcon />
-              <MethodTitle>{translate('credit_card_button')}</MethodTitle>
+              <MethodTitle>Credit card</MethodTitle>
             </IconContainer>
           </CreditCardPayment>
         </PaymentMethodContainer>
@@ -200,7 +200,7 @@ export default function PaymentMethod({ navigation }) {
               <CashAnimation />
             </CashAnimationContainer>
             <CashPaymentText>
-              {translate('cash_payment_description')}
+              You pay the order on delivery
             </CashPaymentText>
             <ContinueButton
               onPress={() =>
@@ -210,13 +210,13 @@ export default function PaymentMethod({ navigation }) {
                   paymentMethod: methodSelected,
                 })
               }>
-              {translate('continue_button')}
+              Continue
             </ContinueButton>
           </CashContainer>
         ) : (
           <CreditCardContainer>
             <PaymentMethodHeader>
-              {translate('credit_card_list_header')}
+              Credit card
             </PaymentMethodHeader>
             {savedCreditCards.length ? (
               <View>
@@ -233,7 +233,7 @@ export default function PaymentMethod({ navigation }) {
                     <NoCreditCardSavedAnimation />
                   </NoCreditCardSavedAnimationContainer>
                   <NoCreditCardSavedText>
-                    {translate('no_credit_card_saved')}
+                    Please add a new credit card
                   </NoCreditCardSavedText>
                 </NoCreditCardSaved>
               </>
@@ -241,7 +241,7 @@ export default function PaymentMethod({ navigation }) {
 
             <AddCardButton
               onPress={() => setShowCreditCardForm(!showCreditCardForm)}>
-              <AddCardText>{translate('add_credit_card_button')}</AddCardText>
+              <AddCardText>Add card</AddCardText>
               <Icon
                 name={showCreditCardForm ? 'chevron-down' : 'chevron-right'}
                 size={25}
@@ -266,7 +266,7 @@ export default function PaymentMethod({ navigation }) {
                 })
               }
               enabled={cardSelected ? true : false}>
-              {translate('continue_button')}
+              Continue
             </ContinueButton>
           </CreditCardContainer>
         )}

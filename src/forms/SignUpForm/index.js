@@ -149,7 +149,7 @@ export default function SignUpForm({ handleFormSubmit, loading }) {
         }
       />
       <SubmitButton onPress={onSubmit} loading={loading}>
-        <Text>Sign up</Text>
+        <Text>Register</Text>
       </SubmitButton>
     </>
   );

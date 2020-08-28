@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import translate from '../../../locales';
-
 import Background from '../../../components/Background';
 
 import { unformatNumber, unformatPrice } from '../../../util/format';
@@ -25,9 +23,6 @@ import {
   CityContainer,
   CityLabel,
   CityText,
-  PostalCodeContainer,
-  PostalCodeLabel,
-  PostalCodeText,
   OrderSummaryContainer,
   OrderSummaryHeader,
   SubtotalContainer,
@@ -69,12 +64,8 @@ export default function OrderConfirmation({ navigation }) {
           user_id: userId,
           status: 'in_progress',
           addressee: address.addressee,
-          // ship_postal_code: unformatNumber(address.postal_code),
           ship_street: address.street,
-          // ship_street_n: address.street_n,
-          // ship_neighborhood: address.neighborhood,
           ship_city: address.city,
-          // ship_state: address.state,
           payment_method: paymentMethod,
           cc_brand: creditCardInfo.brand,
           cc_last_4_digits: creditCardInfo.number.slice(-4),
@@ -87,12 +78,8 @@ export default function OrderConfirmation({ navigation }) {
           user_id: userId,
           status: 'in_progress',
           addressee: address.addressee,
-          // ship_postal_code: unformatNumber(address.postal_code),
           ship_street: address.street,
-          // ship_street_n: address.street_n,
-          // ship_neighborhood: address.neighborhood,
           ship_city: address.city,
-          // ship_state: address.state,
           payment_method: paymentMethod,
           payment_condition: 1,
           delivery_fee: unformatPrice(orderDetails.deliveryFee),
@@ -102,6 +89,7 @@ export default function OrderConfirmation({ navigation }) {
       setLoading(false);
       navigation.navigate('PaymentResult', { status: 'success' });
     } catch (err) {
+      console.log(err);
       setLoading(false);
       navigation.navigate('PaymentResult', { status: 'failed' });
     }
@@ -117,48 +105,44 @@ export default function OrderConfirmation({ navigation }) {
         )}
         <ShippingDetailsContainer>
           <ShippingDetailsHeader>
-            {translate('delivery_details_header')}
+            Delivery details
           </ShippingDetailsHeader>
           <AddresseeContainer>
-            <AddresseeLabel>{translate('addressee_label')}</AddresseeLabel>
+            <AddresseeLabel>Addressee</AddresseeLabel>
             <AddresseeText>{address.addressee}</AddresseeText>
           </AddresseeContainer>
           <AddressContainer>
-            <AddressLabel>{translate('address_label')}</AddressLabel>
+            <AddressLabel>Email</AddressLabel>
             <AddressText>{`${address.street}`}</AddressText>
           </AddressContainer>
           <CityPostalCodeContainer>
             <CityContainer>
-              <CityLabel>{translate('city_label')}</CityLabel>
+              <CityLabel>City</CityLabel>
               <CityText>{address.city}</CityText>
             </CityContainer>
-            <PostalCodeContainer>
-              <PostalCodeLabel>{translate('zipcode_label')}</PostalCodeLabel>
-              <PostalCodeText>NA</PostalCodeText>
-            </PostalCodeContainer>
           </CityPostalCodeContainer>
         </ShippingDetailsContainer>
         <OrderSummaryContainer>
           <OrderSummaryHeader>
-            {translate('order_details_header')}
+            Order details
           </OrderSummaryHeader>
           <SubtotalContainer>
-            <SubtotalLabel>{translate('subtotal_label')}</SubtotalLabel>
+            <SubtotalLabel>Subtotal</SubtotalLabel>
             <SubtotalText>{orderDetails.subtotal}</SubtotalText>
           </SubtotalContainer>
           <DeliveryFeeContainer>
             <DeliveryFeeLabel>
-              {translate('delivery_fee_label')}
+              Delivery fee
             </DeliveryFeeLabel>
             <DeliveryFeeText>{orderDetails.deliveryFee}</DeliveryFeeText>
           </DeliveryFeeContainer>
           <TotalContainer>
-            <TotalLabel>{translate('total_label')}</TotalLabel>
+            <TotalLabel>Total</TotalLabel>
             <TotalText>{orderDetails.total}</TotalText>
           </TotalContainer>
         </OrderSummaryContainer>
         <ConfirmButton loading={loading} onPress={handleSubmit}>
-          {translate('confirm_button')}
+          Finish
         </ConfirmButton>
       </Container>
     </Background>

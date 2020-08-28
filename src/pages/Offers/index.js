@@ -115,7 +115,7 @@ export default function Offers({ navigation }) {
               {amount[item.product.id] || 0}
             </ProductAmountText>
           </ProductAmount>
-          <AddButtonText>{translate('add_button')}</AddButtonText>
+          <AddButtonText>Add</AddButtonText>
         </AddButton>
       </Product>
     );
@@ -140,8 +140,8 @@ export default function Offers({ navigation }) {
             <EmptyBoxAnimation />
           </AnimationContainer>
           <NoOffersTextContainer>
-            <NoOffersText>{translate('no_offers_text')}</NoOffersText>
-            <NoOffersSubText>{translate('no_offers_sub_text')}</NoOffersSubText>
+            <NoOffersText>No offers at the moment</NoOffersText>
+            <NoOffersSubText>Please try again later</NoOffersSubText>
           </NoOffersTextContainer>
         </NoOffers>
       );

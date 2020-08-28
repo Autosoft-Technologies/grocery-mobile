@@ -3,9 +3,9 @@ import translate from '../../../locales';
 
 const signInSchema = Yup.object().shape({
   email: Yup.string()
-    .email(translate('email_error_1'))
-    .required(translate('email_error_2')),
-  password: Yup.string().required(translate('password_error_2')),
+    .email('Enter a valid email')
+    .required('Email is required'),
+  password: Yup.string().required('Password is required'),
 });
 
 export default signInSchema;

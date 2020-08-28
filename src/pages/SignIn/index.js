@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Image } from 'react-native';
 
@@ -15,8 +15,15 @@ import { Container, FormContainer, SignLink, SignLinkText } from './styles';
 export default function SignIn({ navigation }) {
   const dispatch = useDispatch();
 
-  const loading = useSelector(state => state.auth.loading);
+  // let loading = false;
+  const loading = useSelector((state) => state.auth.loading);
+  
+  console.log(loading);
 
+  // useEffect(() => {
+  //   loading = useSelector(state => state.auth.loading);
+  // }, [])
+  
   function handleFormSubmit({ email, password }) {
     dispatch(signInRequest(email, password));
   }
@@ -29,7 +36,7 @@ export default function SignIn({ navigation }) {
           <SignInForm handleFormSubmit={handleFormSubmit} loading={loading} />
         </FormContainer>
         <SignLink onPress={() => navigation.navigate('SignUp')}>
-          <SignLinkText>{translate('create_account_button')}</SignLinkText>
+          <SignLinkText style={{textAlign: "center"}}>Create account</SignLinkText>
         </SignLink>
       </Container>
     </Background>

@@ -45,9 +45,9 @@ export default function PaymentResult({ navigation }) {
           </SuccessAnimationContainer>
           <SucessTextContainer>
             <SucessTextHeader>
-              {translate('payment_success_header')}
+              Success
             </SucessTextHeader>
-            <SucessText>{translate('payment_success')}</SucessText>
+            <SucessText>Order completed successfully. For more details, check your orders</SucessText>
           </SucessTextContainer>
         </>
       ) : (
@@ -57,9 +57,9 @@ export default function PaymentResult({ navigation }) {
           </FailedAnimationContainer>
           <FailedTextContainer>
             <FailedTextHeader>
-              {translate('payment_failed_header')}
+              Failed
             </FailedTextHeader>
-            <FailedText>{translate('payment_failed_error')}</FailedText>
+            <FailedText>Payment failed. For more details, check your orders</FailedText>
           </FailedTextContainer>
         </>
       )}
@@ -70,11 +70,11 @@ export default function PaymentResult({ navigation }) {
             ? [colors.white, colors.success]
             : [colors.white, colors.failed]
         }>
-        {translate('continue_button')}
+        Continue
       </ContinueButton>
       {status === 'failed' && (
         <TryAgainButton onPress={() => navigation.pop(2)}>
-          <TryAgainText>{translate('try_again')}</TryAgainText>
+          <TryAgainText>Try again</TryAgainText>
         </TryAgainButton>
       )}
     </Container>

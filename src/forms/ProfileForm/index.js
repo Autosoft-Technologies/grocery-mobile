@@ -101,7 +101,7 @@ export default function ProfileForm({ handleFormSubmit, loading }) {
     <>
       <Input
         icon="user"
-        placeholder={translate('first_name_placeholder')}
+        placeholder="First name"
         autoCorrect={false}
         autoCapitalize="words"
         onChangeText={text => onChangeText('name', text)}
@@ -113,7 +113,7 @@ export default function ProfileForm({ handleFormSubmit, loading }) {
       />
       <Input
         icon="phone"
-        placeholder={translate('phone_placeholder')}
+        placeholder="Phone"
         ref={phoneRef}
         keyboardType="phone-pad"
         maxLength={15}
@@ -127,7 +127,7 @@ export default function ProfileForm({ handleFormSubmit, loading }) {
       />
       <Input
         icon="envelope"
-        placeholder={translate('email_placeholder_2')}
+        placeholder="Email"
         ref={emailRef}
         autoCorrect={false}
         onChangeText={text => onChangeText('email', text)}
@@ -140,7 +140,7 @@ export default function ProfileForm({ handleFormSubmit, loading }) {
       <Input
         icon="lock"
         secureTextEntry
-        placeholder={translate('old_password_placeholder')}
+        placeholder="Enter your password"
         ref={oldPasswordRef}
         onChangeText={text => onChangeText('oldPassword', text)}
         onBlur={() => onBlur('oldPassword')}
@@ -156,7 +156,7 @@ export default function ProfileForm({ handleFormSubmit, loading }) {
       <Input
         icon="lock"
         secureTextEntry
-        placeholder={translate('new_password_placeholder')}
+        placeholder="Enter your new password"
         ref={passwordRef}
         onChangeText={text => onChangeText('password', text)}
         onBlur={() => onBlur('password')}
@@ -168,7 +168,7 @@ export default function ProfileForm({ handleFormSubmit, loading }) {
       <Input
         icon="lock"
         secureTextEntry
-        placeholder={translate('password_confirmation_placeholder')}
+        placeholder="Confirm the password"
         ref={passwordConfirmationRef}
         onChangeText={text => onChangeText('passwordConfirmation', text)}
         onBlur={() => onBlur('passwordConfirmation')}
@@ -182,7 +182,7 @@ export default function ProfileForm({ handleFormSubmit, loading }) {
         }
       />
       <SubmitButton onPress={onSubmit} loading={loading}>
-        {translate('save_button')}
+        Save
       </SubmitButton>
     </>
   );

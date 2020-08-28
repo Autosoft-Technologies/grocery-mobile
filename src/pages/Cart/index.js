@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, {useState, useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Background from '../../components/Background';
@@ -7,7 +7,7 @@ import translate from '../../locales';
 
 import api from '../../services/api';
 import * as CartActions from '../../store/modules/cart/actions';
-import { formatPrice } from '../../util/format';
+import {formatPrice} from '../../util/format';
 
 import {
   CartContainer,
@@ -45,8 +45,9 @@ import {
   EmptyCartText,
   EmptyCartSubText,
 } from './styles';
+import {TouchableOpacity} from 'react-native';
 
-export default function Cart({ navigation }) {
+export default function Cart({navigation}) {
   const [showDetails, setShowDetails] = useState(false);
   const [feeConfig, setFeeConfig] = useState([]);
   const [deliveryFee, setDeliveryFee] = useState(0);
@@ -121,7 +122,7 @@ export default function Cart({ navigation }) {
   }
 
   // console.log(cart);
-  
+
   return (
     <Background>
       <CartContainer>
@@ -145,7 +146,7 @@ export default function Cart({ navigation }) {
                         onPress={() =>
                           dispatch(CartActions.removeFromCart(product.id))
                         }>
-                        <Icon name="delete-forever" color="#3c8f2e" size={20} />
+                        <Icon name="delete-forever" color="#3c8f2e" size={20}/>
                       </ProductRemoveButton>
                     </ProductDetails>
                     <ProductControls>
@@ -156,7 +157,7 @@ export default function Cart({ navigation }) {
                           size={20}
                         />
                       </ProductControlButton>
-                      <ProductAmount value={String(product.amount || 0)} />
+                      <ProductAmount value={String(product.amount || 0)}/>
                       <ProductControlButton onPress={() => increment(product)}>
                         <Icon
                           name="plus-circle-outline"
@@ -173,46 +174,51 @@ export default function Cart({ navigation }) {
             {showDetails && (
               <DetailsContainer>
                 <Subtotal>
-                  <SubtotalLabel>{translate('subtotal_label')}</SubtotalLabel>
+                  <SubtotalLabel>Subtotal</SubtotalLabel>
                   <SubTotalValue>{subtotal}</SubTotalValue>
                 </Subtotal>
                 <DeliveryCharges>
                   <DeliveryChargesLabel>
-                    {translate('delivery_fee_label')}
+                    Delivery fee
                   </DeliveryChargesLabel>
                   <DeliveryChargesValue>
                     {formattedDeliveryFee}
                   </DeliveryChargesValue>
                 </DeliveryCharges>
                 <GrandTotal>
-                  <GrandTotalLabel>{translate('total_label')}</GrandTotalLabel>
+                  <GrandTotalLabel>Total</GrandTotalLabel>
                   <GrandTotalValue>{total}</GrandTotalValue>
                 </GrandTotal>
               </DetailsContainer>
             )}
 
             <CartFooter>
-              <ConfirmOrderText>{translate('confirm_order')}</ConfirmOrderText>
+              <ConfirmOrderText>Complete order</ConfirmOrderText>
+
               <ViewDetailsButton onPress={() => setShowDetails(!showDetails)}>
-                <Icon name="receipt" color="#fff" size={20} />
+                <Icon name="receipt" color="#fff" size={20}/>
               </ViewDetailsButton>
-              <TotalContainer>
-                <Total>{total}</Total>
-                <Icon
-                  name="arrow-right"
-                  color="#fff"
-                  size={20}
-                  onPress={() =>
-                    navigation.navigate('DeliveryAddress', {
-                      orderDetails: {
-                        subtotal,
-                        total,
-                        deliveryFee: formattedDeliveryFee,
-                      },
-                    })
-                  }
-                />
-              </TotalContainer>
+              
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('DeliveryAddress', {
+                    orderDetails: {
+                      subtotal,
+                      total,
+                      deliveryFee: formattedDeliveryFee,
+                    },
+                  })
+                }
+              >
+                <TotalContainer>
+                  <Total>{total}</Total>
+                  <Icon
+                    name="arrow-right"
+                    color="#fff"
+                    size={20}
+                  />
+                </TotalContainer>
+              </TouchableOpacity>
             </CartFooter>
           </>
         ) : (
@@ -222,9 +228,9 @@ export default function Cart({ navigation }) {
               onAnimationFinish={() => animRef.play(419, 563)}
             />
             <EmptyCartTextContainer>
-              <EmptyCartText>{translate('empty_cart_text')}</EmptyCartText>
+              <EmptyCartText>Your shopping cart is empty</EmptyCartText>
               <EmptyCartSubText>
-                {translate('empty_cart_sub_text')}
+                Fill this basket with some delicious fruits
               </EmptyCartSubText>
             </EmptyCartTextContainer>
           </EmptyCart>

@@ -15,11 +15,11 @@ import {
   SignLink,
   SignLinkText,
 } from './styles';
-import translate from '../../locales';
 
 export default function SignUp({ navigation }) {
   const dispatch = useDispatch();
 
+  // const loading = false;
   const loading = useSelector(state => state.auth.loading);
 
   function handleFormSubmit({
@@ -45,7 +45,7 @@ export default function SignUp({ navigation }) {
           <Image source={logo} />
           <SignUpForm handleFormSubmit={handleFormSubmit} loading={loading} />
           <SignLink onPress={() => navigation.navigate('SignIn')}>
-            <SignLinkText>
+            <SignLinkText >
               I already have an account
             </SignLinkText>
           </SignLink>

@@ -48,10 +48,10 @@ export default function OrderDetails({ navigation }) {
     setOrderDetails(orderDetailsFormatted);
 
     const tableHeader = [
-      translate('product_label'),
-      translate('content_label'),
-      translate('quantity_label'),
-      translate('price_label'),
+      'Product',
+      'Content',
+      'Qty',
+      'Price',
     ];
 
     const tableRows = orderDetailsFormatted.order_details.map(order => [
@@ -67,8 +67,8 @@ export default function OrderDetails({ navigation }) {
   }, []);
 
   const paymentMethod = {
-    credit_card: translate('credit_card'),
-    cash: translate('cash'),
+    credit_card: 'Credit card',
+    cash: 'Cash',
   };
 
   return (

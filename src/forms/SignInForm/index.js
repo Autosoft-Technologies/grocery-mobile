@@ -67,7 +67,7 @@ export default function SignInForm({ handleFormSubmit, loading }) {
       <Input
         icon="envelope"
         keyboardType="email-address"
-        placeholder={translate('email_placeholder')}
+        placeholder="Email"
         autoCapitalize="none"
         autoCorrect={false}
         ref={emailRef}
@@ -81,7 +81,7 @@ export default function SignInForm({ handleFormSubmit, loading }) {
       <Input
         icon="lock"
         secureTextEntry
-        placeholder={translate('password_placeholder')}
+        placeholder="Password"
         ref={passwordRef}
         onChangeText={text => onChangeText('password', text)}
         onBlur={() => onBlur('password')}
@@ -91,7 +91,7 @@ export default function SignInForm({ handleFormSubmit, loading }) {
         error={fieldErrors.password && touched.password && fieldErrors.password}
       />
       <SubmitButton onPress={onSubmit} loading={loading}>
-        {translate('sign_in_button')}
+        Login
       </SubmitButton>
     </>
   );

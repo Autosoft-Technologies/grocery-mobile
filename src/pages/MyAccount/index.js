@@ -19,7 +19,7 @@ export default function MyAccount({ navigation }) {
         <IconContainer>
           <Icon name="person" size={20} color="#3c8f2e" />
         </IconContainer>
-        <ProfileLabel>{translate('profile_button')}</ProfileLabel>
+        <ProfileLabel>Profile</ProfileLabel>
       </ProfileCard>
       <ShippingAddressCard
         onPress={() => navigation.navigate('ShippingAddress')}>
@@ -27,7 +27,7 @@ export default function MyAccount({ navigation }) {
           <Icon name="local-shipping" size={20} color="#3c8f2e" />
         </IconContainer>
         <ShippingAddressLabel>
-          {translate('shipping_address_button')}
+          Home address
         </ShippingAddressLabel>
       </ShippingAddressCard>
     </Container>

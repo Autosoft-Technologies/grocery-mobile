@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
-import { format, parseISO } from 'date-fns';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet} from 'react-native';
+import {format, parseISO} from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { dateLanguage } from '../../locales';
+import {dateLanguage} from '../../locales';
 
 import translate from '../../locales';
 
@@ -32,14 +32,16 @@ import {
   NoOrdersSubText,
 } from './styles';
 import colors from '../../styles/colors';
+import {useSelector} from "react-redux";
 
-export default function Orders({ navigation }) {
+export default function Orders({navigation}) {
   const [orders, setOrders] = useState(null);
-
+  const userId = useSelector(state => state.user.profile.id);
+  
   useEffect(() => {
     async function loadOrders() {
-      const response = await api.get('orders');
-
+      const response = await api.get('orders/'+userId);
+      console.log(response);
       setOrders(
         response.data.map(order => ({
           ...order,
@@ -71,16 +73,16 @@ export default function Orders({ navigation }) {
     ],
   };
 
-  const renderOrder = ({ item }) => {
+  const renderOrder = ({item}) => {
     return (
       <Order style={styles.boxShadow}>
         <OrderInfo>
           <OrderNumber>{`${translate('order_number_label')} ${
             item.id
-          }`}</OrderNumber>
+            }`}</OrderNumber>
           <OrderDate>{`${translate('placed_in_label')} ${
             item.dateFormatted
-          }`}</OrderDate>
+            }`}</OrderDate>
         </OrderInfo>
         <OrderStatusIcon>
           <Icon
@@ -91,7 +93,7 @@ export default function Orders({ navigation }) {
         </OrderStatusIcon>
         <OrderStatusText>{statusProps[item.status][0]}</OrderStatusText>
         <DetailsButton
-          onPress={() => navigation.navigate('OrderDetails', { order: item })}>
+          onPress={() => navigation.navigate('OrderDetails', {order: item})}>
           <DetailsText>{translate('details_button')}</DetailsText>
         </DetailsButton>
       </Order>
@@ -113,7 +115,7 @@ export default function Orders({ navigation }) {
       return (
         <NoOrders>
           <AnimationContainer>
-            <EmptyBoxAnimation />
+            <EmptyBoxAnimation/>
           </AnimationContainer>
           <NoOrdersTextContainer>
             <NoOrdersText>{translate('no_orders_text')}</NoOrdersText>
@@ -124,7 +126,7 @@ export default function Orders({ navigation }) {
     }
     return (
       <OrderList
-        data={Array.from({ length: 5 }).map((u, i) => i)}
+        data={Array.from({length: 5}).map((u, i) => i)}
         keyExtractor={order => String(order)}
         renderItem={OrderListPlaceholder}
       />
@@ -134,7 +136,7 @@ export default function Orders({ navigation }) {
   return (
     <Background>
       <Container>
-        <RenderList />
+        <RenderList/>
       </Container>
     </Background>
   );

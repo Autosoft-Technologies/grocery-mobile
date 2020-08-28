@@ -62,7 +62,7 @@ export default function Header({ navigation }) {
           size={22}
           onPress={() => navigation.goBack()}
         />
-        <PageTitle>{translate('product_details_title')}</PageTitle>
+        <PageTitle>Product details</PageTitle>
       </BackContainer>
       <BasketButton onPress={() => navigation.navigate('Cart')}>
         <Icon name="basket" color="#FFF" size={20} />
@@ -98,7 +98,7 @@ export default function Header({ navigation }) {
           size={22}
           onPress={() => navigation.goBack()}
         />
-        <PageTitle>{translate('cart_title')}</PageTitle>
+        <PageTitle>Cart</PageTitle>
       </BackContainer>
       {cartSize > 0 && (
         <IconContainer onPress={handleEmptyCart}>
@@ -117,7 +117,7 @@ export default function Header({ navigation }) {
           size={22}
           onPress={() => navigation.goBack()}
         />
-        <PageTitle>{translate('offers_title')}</PageTitle>
+        <PageTitle>Offers</PageTitle>
       </BackContainer>
       <BasketButton onPress={() => navigation.navigate('Cart')}>
         <Icon name="basket" color="#FFF" size={20} />
@@ -135,7 +135,7 @@ export default function Header({ navigation }) {
           size={22}
           onPress={() => navigation.goBack()}
         />
-        <PageTitle>{translate('orders_title')}</PageTitle>
+        <PageTitle>My orders</PageTitle>
       </BackContainer>
     </>
   );
@@ -149,7 +149,7 @@ export default function Header({ navigation }) {
           size={22}
           onPress={() => navigation.goBack()}
         />
-        <PageTitle>{translate('account_title')}</PageTitle>
+        <PageTitle>My account</PageTitle>
       </BackContainer>
     </>
   );
@@ -163,7 +163,7 @@ export default function Header({ navigation }) {
           size={22}
           onPress={() => navigation.goBack()}
         />
-        <PageTitle>{translate('profile_title')}</PageTitle>
+        <PageTitle>Profile</PageTitle>
       </BackContainer>
     </>
   );
@@ -177,7 +177,7 @@ export default function Header({ navigation }) {
           size={22}
           onPress={() => navigation.goBack()}
         />
-        <PageTitle>{translate('shipping_address_title')}</PageTitle>
+        <PageTitle>Home address</PageTitle>
       </BackContainer>
     </>
   );
@@ -191,7 +191,7 @@ export default function Header({ navigation }) {
           size={22}
           onPress={() => navigation.goBack()}
         />
-        <PageTitle>{translate('order_details_title')}</PageTitle>
+        <PageTitle>Order details</PageTitle>
       </BackContainer>
     </>
   );
@@ -205,7 +205,7 @@ export default function Header({ navigation }) {
           size={22}
           onPress={() => navigation.goBack()}
         />
-        <PageTitle>{translate('search_title')}</PageTitle>
+        <PageTitle>Search</PageTitle>
       </BackContainer>
       <BasketButton onPress={() => navigation.navigate('Cart')}>
         <Icon name="basket" color="#FFF" size={20} />
@@ -223,7 +223,7 @@ export default function Header({ navigation }) {
           size={22}
           onPress={() => navigation.goBack()}
         />
-        <PageTitle>{translate('delivery_address_title')}</PageTitle>
+        <PageTitle>Delivery address</PageTitle>
       </BackContainer>
     </HeaderContainer>
   );
@@ -237,7 +237,7 @@ export default function Header({ navigation }) {
           size={22}
           onPress={() => navigation.goBack()}
         />
-        <PageTitle>{translate('payment_method_title')}</PageTitle>
+        <PageTitle>Payment method</PageTitle>
       </BackContainer>
     </HeaderContainer>
   );
@@ -251,7 +251,7 @@ export default function Header({ navigation }) {
           size={22}
           onPress={() => navigation.goBack()}
         />
-        <PageTitle>{translate('order_confirmation_title')}</PageTitle>
+        <PageTitle>Order review</PageTitle>
       </BackContainer>
     </HeaderContainer>
   );

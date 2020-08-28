@@ -40,12 +40,12 @@ export default function CreditCard({ data, height }) {
       </NumberContainer>
       <InfoContainer>
         <NameContainer>
-          <NameLabel>{translate('name_on_card_label')}</NameLabel>
+          <NameLabel>Name on card</NameLabel>
           <NameText>{nameOnCard}</NameText>
         </NameContainer>
         <ExpirationDateContainer>
           <ExpirationDateLabel>
-            {translate('expiration_date_label')}
+            Expiration
           </ExpirationDateLabel>
           <ExpirationDateText>{`${expirationMonth}/${expirationYear}`}</ExpirationDateText>
         </ExpirationDateContainer>

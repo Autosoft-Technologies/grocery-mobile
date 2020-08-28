@@ -85,7 +85,7 @@ export default function AddCardForm({ handleFormSubmit, loading }) {
   return (
     <>
       <Input
-        placeholder={translate('name_on_card_placeholder')}
+        placeholder="Name on card"
         autoCapitalize="words"
         autoCorrect={false}
         ref={nameOnCardRef}
@@ -100,7 +100,7 @@ export default function AddCardForm({ handleFormSubmit, loading }) {
       />
       <Input
         keyboardType="numeric"
-        placeholder={translate('number_placeholder')}
+        placeholder="Number"
         autoCorrect={false}
         maxLength={19}
         ref={numberRef}
@@ -113,7 +113,7 @@ export default function AddCardForm({ handleFormSubmit, loading }) {
       />
       <Input
         keyboardType="numeric"
-        placeholder={translate('expiration_date_placeholder')}
+        placeholder="Expiration date"
         autoCorrect={false}
         maxLength={5}
         ref={expirationDateRef}
@@ -130,7 +130,7 @@ export default function AddCardForm({ handleFormSubmit, loading }) {
       />
       <Input
         keyboardType="numeric"
-        placeholder={translate('cvv_placeholder')}
+        placeholder="CVV"
         autoCorrect={false}
         ref={cvvRef}
         onChangeText={text => onChangeText('cvv', text)}

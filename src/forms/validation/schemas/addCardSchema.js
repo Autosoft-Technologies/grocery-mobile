@@ -6,25 +6,25 @@ const addCardSchema = Yup.object().shape({
   expirationDate: Yup.string()
     .test(
       'testExpirationDate',
-      translate('expiration_date_error_1'),
+      'Expiration date is invalid',
       text => validate.expirationDate(text).isValid,
     )
-    .required(translate('expiration_date_error_2')),
+    .required('Expiration date is required'),
   number: Yup.string()
     .test(
       'testNumber',
-      translate('number_error_1'),
+      'Credit card number is invalid',
       text => validate.number(text.replace(/\D/g, '')).isValid,
     )
-    .required(translate('number_error_2')),
-  nameOnCard: Yup.string().required(translate('name_on_card_error')),
+    .required('Credit card number is required'),
+  nameOnCard: Yup.string().required('Name on card is required'),
   cvv: Yup.string()
     .test(
       'testCVV',
-      translate('cvv_error_1'),
+      'CVV is invalid',
       text => text.length >= 3 && text.length <= 4,
     )
-    .required(translate('cvv_error_2')),
+    .required('CVV is required'),
 });
 
 export default addCardSchema;

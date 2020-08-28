@@ -115,7 +115,7 @@ export default function DeliveryAddressForm({ handleFormSubmit, loading }) {
     <>
       <Input
         editable={!lockForm}
-        placeholder={translate('addressee_placeholder')}
+        placeholder="Receiver"
         maxLength={50}
         autoCorrect={false}
         autoCapitalize="words"
@@ -125,33 +125,14 @@ export default function DeliveryAddressForm({ handleFormSubmit, loading }) {
         onBlur={() => onBlur('addressee')}
         value={form.addressee}
         returnKeyType="next"
-        onSubmitEditing={() => postalCodeRef.current.focus()}
+        onSubmitEditing={() => streetRef.current.focus()}
         error={
           fieldErrors.addressee && touched.addressee && fieldErrors.addressee
         }
       />
-      {/*<Input*/}
-      {/*  editable={!lockForm}*/}
-      {/*  placeholder={translate('zipcode_placeholder')}*/}
-      {/*  maxLength={9}*/}
-      {/*  autoCorrect={false}*/}
-      {/*  keyboardType="numeric"*/}
-      {/*  isFocused={() => postalCodeRef.current.isFocused()}*/}
-      {/*  onChangeText={text => onChangeText('postal_code', text)}*/}
-      {/*  onBlur={() => onBlur('postal_code')}*/}
-      {/*  value={form.postal_code}*/}
-      {/*  ref={postalCodeRef}*/}
-      {/*  returnKeyType="next"*/}
-      {/*  onSubmitEditing={() => streetRef.current.focus()}*/}
-      {/*  error={*/}
-      {/*    fieldErrors.postal_code &&*/}
-      {/*    touched.postal_code &&*/}
-      {/*    fieldErrors.postal_code*/}
-      {/*  }*/}
-      {/*/>*/}
       <Input
         editable={!lockForm}
-        placeholder={translate('street_placeholder')}
+        placeholder="Street"
         maxLength={100}
         autoCorrect={false}
         autoCapitalize="words"
@@ -161,45 +142,12 @@ export default function DeliveryAddressForm({ handleFormSubmit, loading }) {
         value={form.street}
         ref={streetRef}
         returnKeyType="next"
-        onSubmitEditing={() => streetNumberRef.current.focus()}
+        onSubmitEditing={() => cityRef.current.focus()}
         error={fieldErrors.street && touched.street && fieldErrors.street}
       />
-      {/*<Input*/}
-      {/*  editable={!lockForm}*/}
-      {/*  placeholder={translate('street_n_placeholder')}*/}
-      {/*  maxLength={10}*/}
-      {/*  autoCorrect={false}*/}
-      {/*  isFocused={() => streetNumberRef.current.isFocused()}*/}
-      {/*  onChangeText={text => onChangeText('street_n', text)}*/}
-      {/*  onBlur={() => onBlur('street_n')}*/}
-      {/*  value={form.street_n}*/}
-      {/*  ref={streetNumberRef}*/}
-      {/*  returnKeyType="next"*/}
-      {/*  onSubmitEditing={() => neighborhoodRef.current.focus()}*/}
-      {/*  error={fieldErrors.street_n && touched.street_n && fieldErrors.street_n}*/}
-      {/*/>*/}
-      {/*<Input*/}
-      {/*  editable={!lockForm}*/}
-      {/*  placeholder={translate('neighborhood_placeholder')}*/}
-      {/*  maxLength={50}*/}
-      {/*  autoCorrect={false}*/}
-      {/*  autoCapitalize="words"*/}
-      {/*  isFocused={() => neighborhoodRef.current.isFocused()}*/}
-      {/*  onChangeText={text => onChangeText('neighborhood', text)}*/}
-      {/*  onBlur={() => onBlur('neighborhood')}*/}
-      {/*  value={form.neighborhood}*/}
-      {/*  ref={neighborhoodRef}*/}
-      {/*  returnKeyType="next"*/}
-      {/*  onSubmitEditing={() => cityRef.current.focus()}*/}
-      {/*  error={*/}
-      {/*    fieldErrors.neighborhood &&*/}
-      {/*    touched.neighborhood &&*/}
-      {/*    fieldErrors.neighborhood*/}
-      {/*  }*/}
-      {/*/>*/}
       <Input
         editable={!lockForm}
-        placeholder={translate('city_placeholder')}
+        placeholder="Town"
         maxLength={50}
         autoCorrect={false}
         autoCapitalize="words"
@@ -209,27 +157,12 @@ export default function DeliveryAddressForm({ handleFormSubmit, loading }) {
         value={form.city}
         ref={cityRef}
         returnKeyType="next"
-        onSubmitEditing={() => stateRef.current.focus()}
+        onSubmitEditing={() => complementRef.current.focus()}
         error={fieldErrors.city && touched.city && fieldErrors.city}
       />
-      {/*<Input*/}
-      {/*  editable={!lockForm}*/}
-      {/*  placeholder={translate('state_placeholder')}*/}
-      {/*  maxLength={2}*/}
-      {/*  autoCorrect={false}*/}
-      {/*  isFocused={() => stateRef.current.isFocused()}*/}
-      {/*  autoCapitalize="characters"*/}
-      {/*  onChangeText={text => onChangeText('state', text)}*/}
-      {/*  onBlur={() => onBlur('state')}*/}
-      {/*  value={form.state}*/}
-      {/*  ref={stateRef}*/}
-      {/*  returnKeyType="next"*/}
-      {/*  onSubmitEditing={() => complementRef.current.focus()}*/}
-      {/*  error={fieldErrors.state && touched.state && fieldErrors.state}*/}
-      {/*/>*/}
       <Input
         editable={!lockForm}
-        placeholder={translate('complement_placeholder')}
+        placeholder="Complement"
         autoCorrect={false}
         autoCapitalize="words"
         isFocused={() => complementRef.current.isFocused()}
@@ -238,29 +171,13 @@ export default function DeliveryAddressForm({ handleFormSubmit, loading }) {
         value={form.complement}
         ref={complementRef}
         returnKeyType="next"
-        onSubmitEditing={() => referenceRef.current.focus()}
+        onSubmitEditing={() => handleFormSubmit}
         error={
           fieldErrors.complement && touched.complement && fieldErrors.complement
         }
       />
-      {/*<Input*/}
-      {/*  editable={!lockForm}*/}
-      {/*  placeholder={translate('reference_placeholder')}*/}
-      {/*  autoCorrect={false}*/}
-      {/*  autoCapitalize="words"*/}
-      {/*  isFocused={() => referenceRef.current.isFocused()}*/}
-      {/*  onChangeText={text => onChangeText('reference', text)}*/}
-      {/*  onBlur={() => onBlur('reference')}*/}
-      {/*  value={form.reference}*/}
-      {/*  ref={referenceRef}*/}
-      {/*  returnKeyType="send"*/}
-      {/*  onSubmitEditing={onSubmit}*/}
-      {/*  error={*/}
-      {/*    fieldErrors.reference && touched.reference && fieldErrors.reference*/}
-      {/*  }*/}
-      {/*/>*/}
       <SubmitButton onPress={onSubmit} loading={loading}>
-        {translate('continue_button')}
+        Continue
       </SubmitButton>
     </>
   );
