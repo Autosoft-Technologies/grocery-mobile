@@ -80,6 +80,7 @@ export default function Home({ navigation }) {
       setProducts(productData);
       setCategories(categoriesResponse.data);
       setBanners(bannerData);
+      
     }
 
     getData();

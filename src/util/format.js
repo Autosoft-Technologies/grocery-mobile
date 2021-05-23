@@ -1,11 +1,12 @@
 import currencyFormatter from 'currency-formatter';
+// import Intl from 'react-native-intl';
+// const Intl = require('react-native-intl');
 
 import { getLanguage } from '../locales';
 
 const formatPrice = price => {
-  return currencyFormatter.format(price, {
-    locale: getLanguage(),
-  });
+  // return new Intl.NumberFormat('en-UG', { maximumSignificantDigits: 1, style: 'currency', currency: 'UGX' }).format(price);
+  return currencyFormatter.format(price, { locale: 'en-UG' });
 };
 
 const formatCPF = cpf => {
