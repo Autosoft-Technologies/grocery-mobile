@@ -47,7 +47,7 @@ export default function DeliveryAddressForm({ handleFormSubmit, loading }) {
     async function checkHaveAddress() {
       setLockForm(true);
       const response = await api.get('address');
-      console.log(response);
+      // console.log(response);
       if (response.data) {
         setHaveAddress(true);
         

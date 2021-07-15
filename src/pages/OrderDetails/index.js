@@ -78,13 +78,13 @@ export default function OrderDetails({ navigation }) {
           <OrderInfo>
             <OrderInfoLabelContainer>
               <OrderInfoLabel>
-                {translate('order_details_label')}
+                {'Order details'}
               </OrderInfoLabel>
             </OrderInfoLabelContainer>
             <OrderInfoContentContainer>
-              <OrderInfoContent>{`${translate('order_number_label')} ${
+              <OrderInfoContent>{`${'Order Nº'} ${
                 orderDetails.id
-              }\n${translate('placed_in_label')} ${
+              }\n${'Placed in'} ${
                 orderDetails.dateFormatted
               }`}</OrderInfoContent>
             </OrderInfoContentContainer>
@@ -92,7 +92,7 @@ export default function OrderDetails({ navigation }) {
           <PaymentMethod>
             <PaymentMethodLabelContainer>
               <PaymentMethodLabel>
-                {translate('payment_method_label')}
+                {'Payment method'}
               </PaymentMethodLabel>
             </PaymentMethodLabelContainer>
             <PaymentMethodContentContainer>
@@ -104,20 +104,16 @@ export default function OrderDetails({ navigation }) {
           <ShippingAddress>
             <ShippingAddressLabelContainer>
               <ShippingAddressLabel>
-                {translate('delivery_address_label')}
+                {'Delivery address'}
               </ShippingAddressLabel>
             </ShippingAddressLabelContainer>
             <ShippingAddressContentContainer>
-              <ShippingAddressContent>{`${translate('zipcode_label')}: ${
-                orderDetails.ship_postal_code
-              }\n${translate('address_label')}: ${orderDetails.ship_street}, ${
-                orderDetails.ship_street_n
-              } - ${orderDetails.ship_city}`}</ShippingAddressContent>
+              <ShippingAddressContent>{`${'Address'}: ${orderDetails.ship_street}, - ${orderDetails.ship_city}`}</ShippingAddressContent>
             </ShippingAddressContentContainer>
           </ShippingAddress>
         </OrderDetailsContainer>
         <CartDetails>
-          <TableTitle>{translate('items_header')}</TableTitle>
+          <TableTitle>{'Items'}</TableTitle>
           <Table header={tableData.tableHeader} rows={tableData.tableRows} />
         </CartDetails>
       </Container>

@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {dateLanguage} from '../../locales';
 
-import translate from '../../locales';
+// import translate from '../../locales';
 
 import OrderListPlaceholder from '../../components/Placeholders/OrderList';
 
@@ -57,17 +57,17 @@ export default function Orders({navigation}) {
 
   const statusProps = {
     in_progress: [
-      translate('in_progress_status'),
+      'In progress',
       'arrow-down',
       colors.dark_blue,
     ],
     finished: [
-      translate('finished_status'),
+      'Finished',
       'check-circle-outline',
       colors.success,
     ],
     cancelled: [
-      translate('canceled_status'),
+      'Canceled_status',
       'close-circle-outline',
       colors.failed,
     ],
@@ -77,10 +77,10 @@ export default function Orders({navigation}) {
     return (
       <Order style={styles.boxShadow}>
         <OrderInfo>
-          <OrderNumber>{`${translate('order_number_label')} ${
+          <OrderNumber>{`${'Order Nº'} ${
             item.id
             }`}</OrderNumber>
-          <OrderDate>{`${translate('placed_in_label')} ${
+          <OrderDate>{`${'Placed in'} ${
             item.dateFormatted
             }`}</OrderDate>
         </OrderInfo>
@@ -94,7 +94,7 @@ export default function Orders({navigation}) {
         <OrderStatusText>{statusProps[item.status][0]}</OrderStatusText>
         <DetailsButton
           onPress={() => navigation.navigate('OrderDetails', {order: item})}>
-          <DetailsText>{translate('details_button')}</DetailsText>
+          <DetailsText>{'Details'}</DetailsText>
         </DetailsButton>
       </Order>
     );
@@ -118,8 +118,8 @@ export default function Orders({navigation}) {
             <EmptyBoxAnimation/>
           </AnimationContainer>
           <NoOrdersTextContainer>
-            <NoOrdersText>{translate('no_orders_text')}</NoOrdersText>
-            <NoOrdersSubText>{translate('no_orders_sub_text')}</NoOrdersSubText>
+            <NoOrdersText>{'You have no orders placed'}</NoOrdersText>
+            <NoOrdersSubText>{'When you have orders, we will show you progress and status here.'}</NoOrdersSubText>
           </NoOrdersTextContainer>
         </NoOrders>
       );

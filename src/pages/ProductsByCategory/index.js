@@ -96,7 +96,7 @@ export default function ProductsByCategory({ navigation }) {
             <Icon name="add-shopping-cart" color="#FFF" size={18} />
             <ProductAmountText>{amount[item.id] || 0}</ProductAmountText>
           </ProductAmount>
-          <AddButtonText>{translate('add_button')}</AddButtonText>
+          <AddButtonText>{'Add'}</AddButtonText>
         </AddButton>
       </Product>
     );

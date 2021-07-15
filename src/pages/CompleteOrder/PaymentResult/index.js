@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { StatusBar } from 'react-native';
+import React, {useEffect} from 'react';
+import {Linking, StatusBar} from 'react-native';
 
 import colors from '../../../styles/colors';
 
@@ -21,12 +21,15 @@ import {
 } from './styles';
 import translate from '../../../locales';
 
-export default function PaymentResult({ navigation }) {
+export default function PaymentResult({navigation}) {
   const status = navigation.getParam('status');
-
+  const redirect = navigation.getParam('redirect');
+  console.log(redirect)
+  
   useEffect(() => {
     if (status === 'success') {
       StatusBar.setBackgroundColor(colors.success);
+      Linking.openURL(redirect).catch(err => alert('Connection failed'));
     } else if (status === 'failed') {
       StatusBar.setBackgroundColor(colors.failed);
     }
@@ -41,7 +44,7 @@ export default function PaymentResult({ navigation }) {
       {status === 'success' ? (
         <>
           <SuccessAnimationContainer>
-            <SuccessAnimation />
+            <SuccessAnimation/>
           </SuccessAnimationContainer>
           <SucessTextContainer>
             <SucessTextHeader>
@@ -53,7 +56,7 @@ export default function PaymentResult({ navigation }) {
       ) : (
         <>
           <FailedAnimationContainer>
-            <FailedAnimation />
+            <FailedAnimation/>
           </FailedAnimationContainer>
           <FailedTextContainer>
             <FailedTextHeader>

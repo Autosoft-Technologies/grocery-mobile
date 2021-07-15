@@ -47,7 +47,7 @@ const Home = {
     },
   ),
   navigationOptions: {
-    title: translate('home'),
+    title: 'Home',
     drawerIcon: ({ tintColor }) => (
       <Icon name="home" size={16} color={tintColor} />
     ),
@@ -59,7 +59,7 @@ const Cart = {
     Cart: CartPage,
   }),
   navigationOptions: {
-    title: translate('cart'),
+    title: 'Cart',
     drawerIcon: ({ tintColor }) => (
       <Icon name="shopping-basket" size={16} color={tintColor} />
     ),
@@ -71,7 +71,7 @@ const Orders = {
     Orders: OrdersPage,
   }),
   navigationOptions: {
-    title: translate('orders'),
+    title: 'Orders',
     drawerIcon: ({ tintColor }) => (
       <Icon name="shopping-cart" size={16} color={tintColor} />
     ),
@@ -83,7 +83,7 @@ const Offers = {
     Offers: OffersPage,
   }),
   navigationOptions: {
-    title: translate('offers'),
+    title: 'Offers',
     drawerIcon: ({ tintColor }) => (
       <Icon name="percentage" size={16} color={tintColor} solid />
     ),
@@ -95,7 +95,7 @@ const MyAccount = {
     MyAccountPage,
   }),
   navigationOptions: {
-    title: translate('account'),
+    title: 'Account',
     drawerIcon: ({ tintColor }) => (
       <Icon name="user" size={16} color={tintColor} solid />
     ),
@@ -105,7 +105,7 @@ const MyAccount = {
 const Logout = {
   screen: () => {},
   navigationOptions: {
-    title: translate('sign_out'),
+    title: 'Sign out',
     drawerIcon: ({ tintColor }) => (
       <Icon name="sign-out-alt" size={16} color={tintColor} />
     ),

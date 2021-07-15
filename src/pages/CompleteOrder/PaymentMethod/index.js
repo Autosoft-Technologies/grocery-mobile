@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import AddCardForm from '../../../forms/AddCardForm';
@@ -43,12 +43,17 @@ import {
   ContinueButton,
 } from './styles';
 import translate from '../../../locales';
+import DeliveryAddressForm from "../../../forms/DeliveryAddressForm";
+import {Input} from "../../../forms/DeliveryAddressForm/styles";
+import {handleBlur} from "../../../forms/validation/validations/signUpValidation";
 
-export default function PaymentMethod({ navigation }) {
-  const [methodSelected, setMethodSelected] = useState('cash');
+export default function PaymentMethod({navigation}) {
+  const [methodSelected, setMethodSelected] = useState('mobilemoney');
+  const [mmphone, setMmphone] = useState('');
   const [savedCreditCards, setSavedCreditCards] = useState([]);
   const [showCreditCardForm, setShowCreditCardForm] = useState(false);
   const [cardSelected, setCardSelected] = useState(null);
+  const [fieldErrors, setFieldErrors] = useState({});
 
   const address = navigation.getParam('address');
   const orderDetails = navigation.getParam('orderDetails');
@@ -86,7 +91,7 @@ export default function PaymentMethod({ navigation }) {
       ]);
     }
 
-    loadSavedCards();
+    // loadSavedCards();
   }, []);
 
   function brandIcon(brand) {
@@ -109,12 +114,12 @@ export default function PaymentMethod({ navigation }) {
   }
 
   function handleFormSubmit({
-    brand,
-    nameOnCard,
-    number,
-    expirationDate,
-    cvv,
-  }) {
+                              brand,
+                              nameOnCard,
+                              number,
+                              expirationDate,
+                              cvv,
+                            }) {
     const [expMonth, expYear] = expirationDate.split('/');
     setSavedCreditCards([
       ...savedCreditCards,
@@ -130,7 +135,7 @@ export default function PaymentMethod({ navigation }) {
     ]);
   }
 
-  function renderCard({ item }) {
+  function renderCard({item}) {
     return (
       <CreditCardInfo>
         <CreditCardNumberContainer>
@@ -146,130 +151,177 @@ export default function PaymentMethod({ navigation }) {
           <CreditCardNumber>{`xxxx xxxx xxxx ${item.number.slice(
             -4,
           )}`}</CreditCardNumber>
-          <CreditCardBrand source={brandIcon(item.brand)} />
+          <CreditCardBrand source={brandIcon(item.brand)}/>
         </CreditCardNumberContainer>
         <CreditCardRemoveButton onPress={() => handleRemoveSavedCard(item.id)}>
-          <Icon name="delete" size={16} color="#666672" />
+          <Icon name="delete" size={16} color="#666672"/>
         </CreditCardRemoveButton>
       </CreditCardInfo>
     );
   }
-
+  // async function onBlur(id) {
+  //   if (!touched[id]) {
+  //     setTouched({ ...touched, [id]: true });
+  //
+  //     const errors = await handleBlur(form);
+  //
+  //     if (errors) {
+  //       setFieldErrors(errors);
+  //     } else {
+  //       const { [id]: _, ...rest } = fieldErrors;
+  //       setFieldErrors(rest);
+  //     }
+  //   }
+  // }
+  
   return (
     <Wrapper>
       <Container>
         <PaymentMethodContainer>
-          <CashPayment onPress={() => setMethodSelected('cash')}>
+          <CashPayment onPress={() => setMethodSelected('mobilemoney')}>
             <MethodSelect>
               <Icon
-                name={
-                  methodSelected === 'cash'
-                    ? 'radiobox-marked'
-                    : 'radiobox-blank'
-                }
+                name={'radiobox-marked'}
                 size={16}
                 color="#fff"
               />
             </MethodSelect>
             <IconContainer>
-              <CashIcon />
-              <MethodTitle>Cash</MethodTitle>
+              <CashIcon/>
+              <MethodTitle>Mobile money</MethodTitle>
             </IconContainer>
           </CashPayment>
-          <CreditCardPayment onPress={() => setMethodSelected('credit_card')}>
-            <MethodSelect>
-              <Icon
-                name={
-                  methodSelected === 'credit_card'
-                    ? 'radiobox-marked'
-                    : 'radiobox-blank'
-                }
-                size={16}
-                color="#fff"
-              />
-            </MethodSelect>
-            <IconContainer>
-              <CreditCardIcon />
-              <MethodTitle>Credit card</MethodTitle>
-            </IconContainer>
-          </CreditCardPayment>
+          {/*<CreditCardPayment onPress={() => setMethodSelected('credit_card')}>*/}
+          {/*  <MethodSelect>*/}
+          {/*    <Icon*/}
+          {/*      name={*/}
+          {/*        methodSelected === 'credit_card'*/}
+          {/*          ? 'radiobox-marked'*/}
+          {/*          : 'radiobox-blank'*/}
+          {/*      }*/}
+          {/*      size={16}*/}
+          {/*      color="#fff"*/}
+          {/*    />*/}
+          {/*  </MethodSelect>*/}
+          {/*  <IconContainer>*/}
+          {/*    <CreditCardIcon />*/}
+          {/*    <MethodTitle>Credit card</MethodTitle>*/}
+          {/*  </IconContainer>*/}
+          {/*</CreditCardPayment>*/}
         </PaymentMethodContainer>
-        {methodSelected === 'cash' ? (
-          <CashContainer>
-            <CashAnimationContainer>
-              <CashAnimation />
-            </CashAnimationContainer>
-            <CashPaymentText>
-              You pay the order on delivery
-            </CashPaymentText>
-            <ContinueButton
-              onPress={() =>
-                navigation.navigate('OrderConfirmation', {
-                  address,
-                  orderDetails,
-                  paymentMethod: methodSelected,
-                })
-              }>
-              Continue
-            </ContinueButton>
-          </CashContainer>
-        ) : (
-          <CreditCardContainer>
-            <PaymentMethodHeader>
-              Credit card
-            </PaymentMethodHeader>
-            {savedCreditCards.length ? (
-              <View>
-                <SavedCardsList
-                  data={savedCreditCards}
-                  keyExtractor={item => item.id}
-                  renderItem={renderCard}
-                />
-              </View>
-            ) : (
-              <>
-                <NoCreditCardSaved>
-                  <NoCreditCardSavedAnimationContainer>
-                    <NoCreditCardSavedAnimation />
-                  </NoCreditCardSavedAnimationContainer>
-                  <NoCreditCardSavedText>
-                    Please add a new credit card
-                  </NoCreditCardSavedText>
-                </NoCreditCardSaved>
-              </>
-            )}
-
-            <AddCardButton
-              onPress={() => setShowCreditCardForm(!showCreditCardForm)}>
-              <AddCardText>Add card</AddCardText>
-              <Icon
-                name={showCreditCardForm ? 'chevron-down' : 'chevron-right'}
-                size={25}
-                color="#393647"
+        {/*{methodSelected === 'cash' ? (*/}
+        <CashContainer>
+          {/*<CashAnimationContainer>*/}
+          {/*  <CashAnimation/>*/}
+          {/*</CashAnimationContainer>*/}
+          {/*<CashPaymentText>*/}
+          {/*  Pay with mobile money*/}
+          {/*</CashPaymentText>*/}
+          <Container>
+            <FormContainer>
+              {/*<DeliveryAddressForm*/}
+              {/*  handleFormSubmit={handleFormSubmit}*/}
+              {/*  loading={loading}*/}
+              {/*/>*/}
+              <Input
+                icon="phone"
+                placeholder="Mobile money Phone"
+                keyboardType="phone-pad"
+                // ref={phoneRef}
+                maxLength={15}
+                autoCorrect={false}
+                onChangeText={text => setMmphone(text)}
+                // onBlur={() => onBlur('phone')}
+                value={mmphone}
+                // returnKeyType="next"
+                // onSubmitEditing={() => emailRef.current.focus()}
+                // error={fieldErrors.phone && touched.phone && fieldErrors.phone}
               />
-            </AddCardButton>
-            {showCreditCardForm && (
-              <FormContainer>
-                <AddCardForm handleFormSubmit={handleFormSubmit} loading />
-              </FormContainer>
-            )}
 
-            <ContinueButton
-              onPress={() =>
-                navigation.navigate('OrderConfirmation', {
-                  address,
-                  orderDetails,
-                  paymentMethod: methodSelected,
-                  creditCardInfo: savedCreditCards.find(
-                    creditCard => creditCard.id === String(cardSelected),
-                  ),
-                })
-              }
-              enabled={cardSelected ? true : false}>
-              Continue
-            </ContinueButton>
-          </CreditCardContainer>
-        )}
+              {/*<Input*/}
+              {/*  // editable={!lockForm}*/}
+              {/*  placeholder="Phone number"*/}
+              {/*  maxLength={100}*/}
+              {/*  // autoCorrect={false}*/}
+              {/*  autoCapitalize="words"*/}
+              {/*  onChangeText={text => setMmphone(text)}*/}
+              {/*  value={mmphone}*/}
+              {/*  // ref={streetRef}*/}
+              {/*  // returnKeyType="next"*/}
+              {/*  // onSubmitEditing={() => cityRef.current.focus()}*/}
+              {/*  // error={fieldErrors.street && touched.street && fieldErrors.street}*/}
+              {/*/>*/}
+            </FormContainer>
+          </Container>
+          <ContinueButton
+            onPress={() =>
+              navigation.navigate('OrderConfirmation', {
+                mmphone: mmphone,
+                address,
+                orderDetails,
+                paymentMethod: methodSelected,
+              })
+            }>
+            Continue
+          </ContinueButton>
+        </CashContainer>
+        {/*) : (*/}
+        {/*  <CreditCardContainer>*/}
+        {/*    <PaymentMethodHeader>*/}
+        {/*      Credit card*/}
+        {/*    </PaymentMethodHeader>*/}
+        {/*    {savedCreditCards.length ? (*/}
+        {/*      <View>*/}
+        {/*        <SavedCardsList*/}
+        {/*          data={savedCreditCards}*/}
+        {/*          keyExtractor={item => item.id}*/}
+        {/*          renderItem={renderCard}*/}
+        {/*        />*/}
+        {/*      </View>*/}
+        {/*    ) : (*/}
+        {/*      <>*/}
+        {/*        <NoCreditCardSaved>*/}
+        {/*          <NoCreditCardSavedAnimationContainer>*/}
+        {/*            <NoCreditCardSavedAnimation />*/}
+        {/*          </NoCreditCardSavedAnimationContainer>*/}
+        {/*          <NoCreditCardSavedText>*/}
+        {/*            Please add a new credit card*/}
+        {/*          </NoCreditCardSavedText>*/}
+        {/*        </NoCreditCardSaved>*/}
+        {/*      </>*/}
+        {/*    )}*/}
+
+        {/*    <AddCardButton*/}
+        {/*      onPress={() => setShowCreditCardForm(!showCreditCardForm)}>*/}
+        {/*      <AddCardText>Add card</AddCardText>*/}
+        {/*      <Icon*/}
+        {/*        name={showCreditCardForm ? 'chevron-down' : 'chevron-right'}*/}
+        {/*        size={25}*/}
+        {/*        color="#393647"*/}
+        {/*      />*/}
+        {/*    </AddCardButton>*/}
+        {/*    {showCreditCardForm && (*/}
+        {/*      <FormContainer>*/}
+        {/*        <AddCardForm handleFormSubmit={handleFormSubmit} loading />*/}
+        {/*      </FormContainer>*/}
+        {/*    )}*/}
+
+        {/*    <ContinueButton*/}
+        {/*      onPress={() =>*/}
+        {/*        navigation.navigate('OrderConfirmation', {*/}
+        {/*          address,*/}
+        {/*          orderDetails,*/}
+        {/*          paymentMethod: methodSelected,*/}
+        {/*          creditCardInfo: savedCreditCards.find(*/}
+        {/*            creditCard => creditCard.id === String(cardSelected),*/}
+        {/*          ),*/}
+        {/*        })*/}
+        {/*      }*/}
+        {/*      enabled={cardSelected ? true : false}>*/}
+        {/*      Continue*/}
+        {/*    </ContinueButton>*/}
+        {/*  </CreditCardContainer>*/}
+        {/*)}*/}
       </Container>
     </Wrapper>
   );

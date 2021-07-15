@@ -66,7 +66,7 @@ export default function ProductDetails({ navigation }) {
               {amount[productDetails.id] || 0}
             </ProductAmountText>
           </ProductAmount>
-          <AddButtonText>{translate('add_button')}</AddButtonText>
+          <AddButtonText>{'Add'}</AddButtonText>
         </AddButton>
       </Container>
     </Background>
